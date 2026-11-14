@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b45309">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>लक्ष्मी देवी कंस्ट्रक्शन</title>
+<style>
+:root{--bg:#f7f4ee;--card:#fff;--tx:#1f2937;--mu:#6b7280;--pr:#b45309;--bd:#e5e7eb;--ok:#15803d;--bad:#b91c1c;--wa:#1d4ed8}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--card:#1c1f22;--tx:#f3f4f6;--mu:#9ca3af;--pr:#f59e0b;--bd:#2d3237;--ok:#4ade80;--bad:#f87171;--wa:#60a5fa}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:76px;line-height:1.5}
+header{background:#b45309;color:#fff;padding:14px 16px}
+header h1{margin:0;font-size:21px}header small{opacity:.92}
+main{padding:12px;max-width:640px;margin:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
+.stat b{display:block;font-size:28px}.stat span{color:var(--mu);font-size:14px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.wa{color:var(--wa)}
+h2{font-size:18px;margin:6px 0 10px}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+button,.btn{border:0;border-radius:10px;padding:10px 12px;font-size:15px;background:var(--pr);color:#fff;font-weight:600;text-decoration:none;display:inline-block}
+button.g,.btn.g{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.big{width:100%;padding:14px;font-size:17px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center;margin-top:8px;font-size:13px;color:var(--mu)}
+.nums b{display:block;font-size:20px;color:var(--tx)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--bd)}
+nav button{flex:1;background:none;color:var(--mu);border-radius:0;padding:10px 4px;font-size:14px}
+nav button.on{color:var(--pr)}
+dialog{border:0;border-radius:16px;padding:16px;width:92%;max-width:420px;background:var(--card);color:var(--tx)}
+dialog::backdrop{background:#0008}
+input{width:100%;padding:12px;margin:6px 0;border:1px solid var(--bd);border-radius:10px;font-size:16px;background:var(--bg);color:var(--tx)}
+.log{font-size:15px;border-bottom:1px solid var(--bd);padding:8px 0}
+.log small{color:var(--mu)}
+.foot{text-align:center;color:var(--mu);font-size:13px;margin:18px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<header><h1>लक्ष्मी देवी कंस्ट्रक्शन</h1><small>सेंटरिंग सामान का हिसाब • मालिक: अरविंद अक्कल</small></header>
+<main>
+ <section id="home"></section>
+ <section id="items" class="hide"></section>
+ <section id="hisab" class="hide"></section>
+ <section id="contact" class="hide">
+  <div class="card"><h2>अरविंद अक्कल (मालिक)</h2><p style="margin:0 0 8px">8965878869</p>
+   <a class="btn" href="tel:+918965878869">📞 फोन करें</a>
+   <a class="btn g" href="https://wa.me/918965878869">व्हाट्सएप</a></div>
+  <div class="card"><h2>कुलदीप अक्कल</h2><p style="margin:0 0 8px">6264199227</p>
+   <a class="btn" href="tel:+916264199227">📞 फोन करें</a>
+   <a class="btn g" href="https://wa.me/916264199227">व्हाट्सएप</a></div>
+  <div class="card"><h2>सेंटरिंग किराये के लिए संपर्क करें</h2>
+   <p style="margin:0;color:var(--mu)">प्लेट, जैक, पाइप, चैनल और बाकी सेंटरिंग का सामान किराये पर लेने के लिए ऊपर दिए नंबर पर फोन करें।</p></div>
+  <div class="card"><h2>बैकअप (सुरक्षित कॉपी)</h2>
+   <p style="margin:0 0 8px;color:var(--mu)">सारा हिसाब इसी फोन में सेव होता है। बीच-बीच में बैकअप ले लें।</p>
+   <button onclick="exp()">बैकअप डाउनलोड करें</button>
+   <button class="g" onclick="document.getElementById('imp').click()">बैकअप वापस लाएं</button>
+   <input id="imp" type="file" accept=".json" class="hide" onchange="imp(this)"></div>
+ </section>
+ <div class="foot">बनाने वाले: कुलदीप अक्कल</div>
+</main>
+<nav>
+ <button data-t="home" class="on">🏠<br>होम</button>
+ <button data-t="items">🧱<br>सामान</button>
+ <button data-t="hisab">📒<br>हिसाब</button>
+ <button data-t="contact">📞<br>संपर्क</button>
+</nav>
+<dialog id="dlg"><h2 id="dt"></h2><div id="db"></div>
+ <div class="row"><button id="ok">सेव करें</button><button class="g" onclick="dlg.close()">रद्द करें</button></div></dialog>
+<script>
+const K='ldc_v1',$=id=>document.getElementById(id);
+let D;try{D=JSON.parse(localStorage.getItem(K))||{items:[],log:[]}}catch(e){D={items:[],log:[]}}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(e){alert('सेव नहीं हुआ')}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+function calc(i){let o=0;D.log.forEach(l=>{if(l.i==i.id){if(l.t=='out')o+=l.q;if(l.t=='in')o-=l.q}});
+ return{out:o,rep:i.rep||0,av:i.total-o-(i.rep||0)}}
+const LBL={out:'बाहर गया',in:'वापस आया',rep:'मरम्मत में गया',fix:'मरम्मत से ठीक हुआ',add:'स्टॉक बढ़ाया',sub:'स्टॉक घटाया'};
+const BTN={out:'बाहर भेजो',in:'वापस आया',rep:'मरम्मत',fix:'ठीक हुआ',add:'+ स्टॉक',sub:'- स्टॉक'};
+function render(){
+ let T=0,O=0,R=0,A=0;
+ D.items.forEach(i=>{const c=calc(i);T+=i.total;O+=c.out;R+=c.rep;A+=c.av});
+ $('home').innerHTML=`<div class="grid">
+  <div class="card stat"><span>कुल सामान</span><b>${T}</b></div>
+  <div class="card stat"><span>गोदाम में</span><b class="ok">${A}</b></div>
+  <div class="card stat"><span>बाहर गया (किराये पर)</span><b class="wa">${O}</b></div>
+  <div class="card stat"><span>मरम्मत करनी है</span><b class="bad">${R}</b></div></div>
+  <button class="big" onclick="addItem()">+ नया सामान जोड़ो</button>
+  <h2 style="margin-top:16px">आखिरी हिसाब</h2>`+
+  (D.log.slice(-5).reverse().map(logRow).join('')||'<p style="color:var(--mu)">अभी कुछ नहीं है। पहले "नया सामान जोड़ो" दबाओ।</p>');
+ $('items').innerHTML=(D.items.map(i=>{const c=calc(i);return`<div class="card"><h2 style="margin:0">${esc(i.name)}</h2>
+  <div class="nums"><div><b>${i.total}</b>कुल</div><div><b class="ok">${c.av}</b>गोदाम</div><div><b class="wa">${c.out}</b>बाहर</div><div><b class="bad">${c.rep}</b>मरम्मत</div></div>
+  <div class="row">${['out','in','rep','fix','add','sub'].map((t,n)=>`<button class="${n>1?'g':''}" onclick="act('${i.id}','${t}')">${BTN[t]}</button>`).join('')}
+  <button class="g" onclick="del('${i.id}')">🗑</button></div></div>`}).join('')||'<p style="color:var(--mu)">कोई सामान नहीं है। होम पर जाकर जोड़ो।</p>');
+ const P={};D.log.forEach(l=>{if(l.t=='out'||l.t=='in'){const n=(D.items.find(x=>x.id==l.i)||{}).name;if(!n)return;const k=(l.p||'-')+'|'+n;P[k]=(P[k]||0)+(l.t=='out'?l.q:-l.q)}});
+ const pend=Object.entries(P).filter(x=>x[1]>0).map(([k,v])=>{const[p,n]=k.split('|');return`<div class="log"><b>${esc(p)}</b> के पास: ${esc(n)} <b class="wa">${v}</b></div>`}).join('');
+ $('hisab').innerHTML=`<div class="card"><h2>किसके पास कितना बाकी है</h2>${pend||'<small>सब वापस आ गया।</small>'}</div>
+  <div class="card"><h2>पूरा हिसाब</h2>${D.log.slice().reverse().map(logRow).join('')||'<small>कुछ नहीं।</small>'}</div>`;
+}
+function logRow(l){const it=D.items.find(x=>x.id==l.i);
+ return`<div class="log"><b>${esc(it?it.name:'?')}</b> — ${LBL[l.t]} <b>${l.q}</b>${l.p?' • '+esc(l.p):''}<br><small>${l.d}${l.n?' • '+esc(l.n):''}</small></div>`}
+let go=null;
+function ask(title,html,fn){$('dt').textContent=title;$('db').innerHTML=html;go=fn;$('dlg').showModal()}
+$('ok').onclick=()=>{if(go&&go()!==false)$('dlg').close()};
+function addItem(){ask('नया सामान','<input id="a" placeholder="नाम (जैसे: प्लेट, जैक, पाइप)"><input id="b" type="number" inputmode="numeric" placeholder="कितना है (संख्या)">',()=>{
+ const n=$('a').value.trim(),q=parseInt($('b').value);if(!n||!(q>=0)){alert('नाम और संख्या डालो');return false}
+ const id=uid();D.items.push({id,name:n,total:q,rep:0});D.log.push({i:id,t:'add',q,d:today()});save();render()})}
+function act(id,t){const i=D.items.find(x=>x.id==id),c=calc(i);
+ const party=(t=='out'||t=='in');
+ ask(i.name+': '+BTN[t],`<input id="q" type="number" inputmode="numeric" placeholder="कितना?">`+(party?'<input id="p" placeholder="किसके पास / साइट का नाम">':'')+'<input id="n" placeholder="नोट (चाहें तो)">',()=>{
+  const q=parseInt($('q').value);if(!(q>0)){alert('संख्या डालो');return false}
+  const lim={out:c.av,in:c.out,rep:c.av,fix:c.rep,add:1e9,sub:c.av}[t];
+  if(q>lim){alert('इतना नहीं है। ज़्यादा से ज़्यादा: '+lim);return false}
+  const p=party?$('p').value.trim():'';if(party&&!p){alert('किसके पास / साइट का नाम डालो');return false}
+  if(t=='rep')i.rep=(i.rep||0)+q;if(t=='fix')i.rep-=q;if(t=='add')i.total+=q;if(t=='sub')i.total-=q;
+  D.log.push({i:id,t,q,p,n:$('n').value.trim(),d:today()});save();render()})}
+function del(id){if(!confirm('यह सामान और इसका हिसाब हटा दें?'))return;D.items=D.items.filter(x=>x.id!=id);D.log=D.log.filter(l=>l.i!=id);save();render()}
+function today(){return new Date().toLocaleDateString('hi-IN',{day:'2-digit',month:'short',year:'numeric'})}
+function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download='laxmi-devi-backup.json';a.click()}
+function imp(f){const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.items||!x.log)throw 0;D=x;save();render();alert('बैकअप वापस आ गया')}catch(e){alert('गलत फाइल')}};r.readAsText(f.files[0])}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x==b));
+ ['home','items','hisab','contact'].forEach(s=>$(s).classList.toggle('hide',s!=b.dataset.t));scrollTo(0,0)});
+render();
+(function(){try{
+function ic(n){const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d');x.fillStyle='#b45309';x.fillRect(0,0,n,n);
+const p=n*.22,w=n-2*p,h=w/4,g=n*.02;x.fillStyle='#fff';
+for(let r=0;r<4;r++){let o=r%2?w/4:0,px=p-o;while(px<p+w){const a=Math.max(px+g,p),b=Math.min(px+w/2-g,p+w);if(b>a)x.fillRect(a,p+r*h+g,b-a,h-2*g);px+=w/2}}
+return c.toDataURL('image/png')}
+const i192=ic(192),i512=ic(512);
+const a=document.createElement('link');a.rel='apple-touch-icon';a.href=i192;document.head.appendChild(a);
+const u=location.href.split('#')[0].split('?')[0];
+const m={name:'लक्ष्मी देवी कंस्ट्रक्शन',short_name:'लक्ष्मी देवी',lang:'hi',start_url:u,scope:u,display:'standalone',background_color:'#b45309',theme_color:'#b45309',
+icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any'}]};
+const l=document.createElement('link');l.rel='manifest';l.href='data:application/manifest+json;charset=utf-8,'+encodeURIComponent(JSON.stringify(m));document.head.appendChild(l);
+}catch(e){}})();
+</script>
+</body>
+</html>
